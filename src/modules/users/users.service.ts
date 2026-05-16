@@ -1,5 +1,4 @@
 import { Injectable, HttpException, HttpStatus, Logger } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { UserRepository } from './repositories/user.repository';
 import { CreateUserDto, UpdateUserDto, UserResponseDto } from './dto/user.dto';
@@ -9,10 +8,7 @@ import * as bcrypt from 'bcrypt';
 export class UserService {
   private readonly logger = new Logger(UserService.name);
 
-  constructor(
-    @InjectRepository(User)
-    private userRepository: UserRepository,
-  ) {}
+  constructor(private readonly userRepository: UserRepository) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<UserResponseDto> {
     try {

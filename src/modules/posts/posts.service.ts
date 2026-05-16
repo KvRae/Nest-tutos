@@ -1,5 +1,4 @@
 import { Injectable, HttpException, HttpStatus, Logger } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Post } from './entities/post.entity';
 import { PostRepository } from './repositories/post.repository';
 import { CreatePostDto, UpdatePostDto, PostResponseDto } from './dto/post.dto';
@@ -8,10 +7,7 @@ import { CreatePostDto, UpdatePostDto, PostResponseDto } from './dto/post.dto';
 export class PostService {
   private readonly logger = new Logger(PostService.name);
 
-  constructor(
-    @InjectRepository(Post)
-    private postRepository: PostRepository,
-  ) {}
+  constructor(private readonly postRepository: PostRepository) {}
 
   async createPost(createPostDto: CreatePostDto): Promise<PostResponseDto> {
     try {

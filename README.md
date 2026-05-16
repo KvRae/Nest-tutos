@@ -96,6 +96,10 @@ psql -U postgres
 CREATE DATABASE nest_db;
 ```
 
+### 3b. Run with Docker Compose (optional)
+
+If you start PostgreSQL with `docker compose up`, the database is exposed on host port `5433` to avoid conflicts with any local PostgreSQL process. The NestJS app container still connects to the `db` service on port `5432` internally.
+
 ### 4. Run the Application
 
 ```bash
@@ -261,6 +265,7 @@ npm run typeorm:migration:revert
 - Verify PostgreSQL is running: `ps aux | grep postgres`
 - Check connection credentials in `.env`
 - Ensure database exists: `psql -l`
+- If using Docker Compose, connect to PostgreSQL on `localhost:5433` instead of `5432`
 
 ### TypeORM Sync Issues
 - Clear `dist` folder: `rm -rf dist`
